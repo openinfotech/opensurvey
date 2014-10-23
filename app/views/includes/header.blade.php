@@ -5,7 +5,7 @@
         <!-- BEGIN LOGO -->
         <div class="page-logo">
             <a href="index.html">
-                <img src="assets/admin/layout/img/logo.png" alt="logo" class="logo-default"/>
+                <img src="{{URL::asset('assets/admin/layout/img/logo.png')}}" alt="logo" class="logo-default"/>
             </a>
             <div class="menu-toggler sidebar-toggler">
                 <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
@@ -138,14 +138,14 @@
                 <!-- BEGIN USER LOGIN DROPDOWN -->
                 <li class="dropdown dropdown-user">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                        <img alt="" class="img-circle" src="assets/admin/layout/img/avatar3_small.jpg"/>
+                        <img alt="" class="img-circle" src="{{URL::asset('assets/admin/layout/img/avatar3_small.jpg')}}"/>
                         <span class="username username-hide-on-mobile">
-                            Bob </span>
+                            {{Auth::user()->username}} </span>
                         <i class="fa fa-angle-down"></i>
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="extra_profile.html">
+                            <a href="{{URL::route('account-profile')}}">
                                 <i class="icon-user"></i> My Profile </a>
                         </li>
                         <li>

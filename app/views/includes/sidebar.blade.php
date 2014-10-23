@@ -5,11 +5,10 @@
     <div class="page-sidebar navbar-collapse collapse">
         <!-- BEGIN SIDEBAR MENU -->
         <ul class="page-sidebar-menu " data-auto-scroll="true" data-slide-speed="200" style="margin-top:25px;">
-            <li class="start active open">
+            <li class="start">
                 <a href="javascript:;">
                     <i class="icon-home"></i>
                     <span class="title">Dashboard</span>
-                    <span class="selected"></span>
                 </a>
             </li>
             <li>

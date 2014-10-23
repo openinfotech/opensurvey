@@ -18,6 +18,15 @@
  */
 Route::group(array('before' => 'auth'), function() {
 
+
+    /**
+     * Sign Out(get)
+     */
+    Route::get('/survey', array(
+        'as' => 'show-survey',
+        'uses' => 'SurveyController@showServey'
+    ));
+
     /**
      * Sign Out(get)
      */
@@ -25,9 +34,54 @@ Route::group(array('before' => 'auth'), function() {
         'as' => 'account-sign-out',
         'uses' => 'AccountController@getSignOut'
     ));
+
+
+    /**
+     * Sign Out(get)
+     */
+    Route::get('/account/profile', array(
+        'as' => 'account-profile',
+        'uses' => 'AccountController@getProfile'
+    ));
+
+    /**
+     * Profile (get)
+     */
+    Route::get('/account/profile', array(
+        'as' => 'account-profile',
+        'uses' => 'AccountController@getProfile'
+    ));
+
+    /**
+     * Resend Activation Email(get)
+     */
+    Route::get('/account/resend/{Redirect_URL}', array(
+        'as' => 'account-resend-activation-email',
+        'uses' => 'AccountController@getResendActivationEmail'
+    ));
 });
 
+/**
+ * This is Home Controller
+ */
 Route::get('/', array('as' => 'home', 'uses' => 'HomeController@home'));
+
+
+/**
+ * This is blank Page
+ */
+Route::get('/blank', function() {
+    return View::make('pages.blank');
+});
+
+/**
+ * Activate Account (get)
+ */
+Route::get('/account/activate/{code}', array(
+    'as' => 'account-activate',
+    'uses' => 'AccountController@getActivate'
+));
+
 /**
  * Unauthenticated group
  */
@@ -89,13 +143,7 @@ Route::group(array('before' => 'guest'), function() {
         'uses' => 'AccountController@getCreate'
     ));
 
-    /**
-     * Activate Account (get)
-     */
-    Route::get('/account/activate/{code}', array(
-        'as' => 'account-activate',
-        'uses' => 'AccountController@getActivate'
-    ));
+
 
     /**
      * Reset Password (get)
@@ -104,8 +152,8 @@ Route::group(array('before' => 'guest'), function() {
         'as' => 'reset-password',
         'uses' => 'AccountController@getResetPassword'
     ));
-    
-      /**
+
+    /**
      * Reset Password (POST)
      */
     Route::post('/account/reset-password', array(

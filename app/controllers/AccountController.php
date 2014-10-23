@@ -2,6 +2,38 @@
 
 class AccountController extends BaseController {
 
+    public function getResendActivationEmail($Redirect_URL) {
+        if (Auth::user()->Active == 0) {
+            $code = '';
+            if (Auth::user()->Code == '') {
+                $code = str_random(60);
+            } else {
+                $code = Auth::user()->Code;
+            }
+
+            $user = Auth::user();
+            $user->Code = $code;
+            if ($user->save()) {
+
+
+                Mail::send('emails.auth.activate', array('link' => URL::route('account-activate', $code), 'Name' => Auth::user()->First_Name . ' ' . Auth::user()->Last_Name), function($message) use ($user) {
+                    $message->to($user->Email_Id, $user->Username)->subject('Activate Open Survet Account');
+                });
+                return Redirect::to(urldecode($Redirect_URL))
+                                ->with('global', 'Please check your Email for Verification Email !');
+            } else {
+                return Redirect::to(urldecode($Redirect_URL))
+                                ->with('global', 'Sorry for inconvenience, there is problem in sendin Verification Email.');
+            }
+        }
+        return Redirect::to(urldecode($Redirect_URL))
+                        ->with('global', 'you are already verified !');
+    }
+
+    public function getProfile() {
+        return View::make('pages.account.profile');
+    }
+
     public function getForgotPassword() {
         return View::make('pages.account.forgotpassword');
     }
@@ -153,8 +185,14 @@ class AccountController extends BaseController {
             $user->Code = '';
 
             if ($user->save()) {
-                return Redirect:: route('account-sign-in')
-                                ->with('global', 'Your account has been created ! We have sent you email !');
+                if (Auth::check()) {
+                    //do something
+                    return Redirect:: route('home')
+                                    ->with('global', 'Your account is activated !');
+                } else {
+                    return Redirect:: route('account-sign-in')
+                                    ->with('global', 'Your account is activated !');
+                }
             }
         }
         return Redirect::route('account-sign-in')->with('global', 'We could not activate accaount');

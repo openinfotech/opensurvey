@@ -28,116 +28,48 @@
             </div>
             <!-- /.modal -->
             <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-            <!-- BEGIN STYLE CUSTOMIZER -->
-            <div class="theme-panel hidden-xs hidden-sm">
-                <div class="toggler">
-                </div>
-                <div class="toggler-close">
-                </div>
-                <div class="theme-options">
-                    <div class="theme-option theme-colors clearfix">
-                        <span>
-                            THEME COLOR </span>
-                        <ul>
-                            <li class="color-default current tooltips" data-style="default" data-container="body" data-original-title="Default">
-                            </li>
-                            <li class="color-darkblue tooltips" data-style="darkblue" data-container="body" data-original-title="Dark Blue">
-                            </li>
-                            <li class="color-blue tooltips" data-style="blue" data-container="body" data-original-title="Blue">
-                            </li>
-                            <li class="color-grey tooltips" data-style="grey" data-container="body" data-original-title="Grey">
-                            </li>
-                            <li class="color-light tooltips" data-style="light" data-container="body" data-original-title="Light">
-                            </li>
-                            <li class="color-light2 tooltips" data-style="light2" data-container="body" data-html="true" data-original-title="Light 2">
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="theme-option">
-                        <span>
-                            Layout </span>
-                        <select class="layout-option form-control input-small">
-                            <option value="fluid" selected="selected">Fluid</option>
-                            <option value="boxed">Boxed</option>
-                        </select>
-                    </div>
-                    <div class="theme-option">
-                        <span>
-                            Header </span>
-                        <select class="page-header-option form-control input-small">
-                            <option value="fixed" selected="selected">Fixed</option>
-                            <option value="default">Default</option>
-                        </select>
-                    </div>
-                    <div class="theme-option">
-                        <span>
-                            Sidebar Mode</span>
-                        <select class="sidebar-option form-control input-small">
-                            <option value="fixed">Fixed</option>
-                            <option value="default" selected="selected">Default</option>
-                        </select>
-                    </div>
-                    <div class="theme-option">
-                        <span>
-                            Sidebar Menu </span>
-                        <select class="sidebar-menu-option form-control input-small">
-                            <option value="accordion" selected="selected">Accordion</option>
-                            <option value="hover">Hover</option>
-                        </select>
-                    </div>
-                    <div class="theme-option">
-                        <span>
-                            Sidebar Style </span>
-                        <select class="sidebar-style-option form-control input-small">
-                            <option value="default" selected="selected">Default</option>
-                            <option value="light">Light</option>
-                        </select>
-                    </div>
-                    <div class="theme-option">
-                        <span>
-                            Sidebar Position </span>
-                        <select class="sidebar-pos-option form-control input-small">
-                            <option value="left" selected="selected">Left</option>
-                            <option value="right">Right</option>
-                        </select>
-                    </div>
-                    <div class="theme-option">
-                        <span>
-                            Footer </span>
-                        <select class="page-footer-option form-control input-small">
-                            <option value="fixed">Fixed</option>
-                            <option value="default" selected="selected">Default</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <!-- END STYLE CUSTOMIZER -->
             <!-- BEGIN PAGE HEADER-->
             <h3 class="page-title">
-                Dashboard <small>dashboard & statistics</small>
+                <small>Welocme , </small> {{Auth::user()->First_Name .' '.Auth::user()->Last_Name}}
             </h3>
-            <div class="page-bar">
-                <ul class="page-breadcrumb">
-                    <li>
-                        <i class="fa fa-home"></i>
-                        <a href="index.html">Home</a>
-                        <i class="fa fa-angle-right"></i>
-                    </li>
-                    <li>
-                        <a href="#">Dashboard</a>
-                        <i class="fa fa-angle-right"></i>
-                    </li>
-                    <li>
-                        <a href="#">Dashboard</a>
-                    </li>
-                </ul>
-                <div class="page-toolbar">
-                    <div id="dashboard-report-range" class="pull-right tooltips btn btn-fit-height grey-salt" data-placement="top" data-original-title="Change dashboard date range">
-                        <i class="icon-calendar"></i>&nbsp; <span class="thin uppercase visible-lg-inline-block"></span>&nbsp; <i class="fa fa-angle-down"></i>
-                    </div>
-                </div>
-            </div>
+            <!--            <div class="page-bar">
+                            <ul class="page-breadcrumb">
+                                <li>
+                                    <i class="fa fa-home"></i>
+                                    <a href="index.html">Home</a>
+                                    <i class="fa fa-angle-right"></i>
+                                </li>
+                                <li>
+                                    <a href="#">Dashboard</a>
+                                    <i class="fa fa-angle-right"></i>
+                                </li>
+                                <li>
+                                    <a href="#">Dashboard</a>
+                                </li>
+                            </ul>
+                            <div class="page-toolbar">
+                                <div id="dashboard-report-range" class="pull-right tooltips btn btn-fit-height grey-salt" data-placement="top" data-original-title="Change dashboard date range">
+                                    <i class="icon-calendar"></i>&nbsp; <span class="thin uppercase visible-lg-inline-block"></span>&nbsp; <i class="fa fa-angle-down"></i>
+                                </div>
+                            </div>
+                        </div>-->
             <!-- END PAGE HEADER-->
+            @if(Session::has('global'))
+            <div class="note note-success">
+                <p>{{ Session::get('global')}}</p>
+            </div>
+            @endif
+            @if(Auth::user()->Active==0)
+            <div class="note note-warning">
+                <h4 class="block">Account is not activated</h4>
+                <p>
+                    Your account is not activate please find email in your Inbox and activate your account .
+                    For getting activation email please click below link.
+                    <br/><a href="{{URL::route('account-resend-activation-email',urlencode(Request::url()))}}">Resend Email</a>
+                    <!--{{Request::url()}}-->
+                </p>
+            </div>
+            @endif
             <!-- BEGIN DASHBOARD STATS -->
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
@@ -2906,24 +2838,31 @@
     <!-- END QUICK SIDEBAR -->
 </div>
 <!-- END CONTAINER -->
+<!-- END FOOTER -->
 <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
 <!-- BEGIN CORE PLUGINS -->
 <!--[if lt IE 9]>
-<script src="assets/global/plugins/respond.min.js"></script>
-<script src="assets/global/plugins/excanvas.min.js"></script> 
+<script src="{{URL::asset('assets/global/plugins/respond.min.js')}}"></script>
+<script src="{{URL::asset('assets/global/plugins/excanvas.min.js')}}"></script> 
 <![endif]-->
-<script src="assets/global/plugins/jquery-1.11.0.min.js" type="text/javascript"></script>
-<script src="assets/global/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+<script src="{{URL::asset('assets/global/plugins/jquery-1.11.0.min.js')}}" type="text/javascript"></script>
+<script src="{{URL::asset('assets/global/plugins/jquery-migrate-1.2.1.min.js')}}" type="text/javascript"></script>
 <!-- IMPORTANT! Load jquery-ui-1.10.3.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
-<script src="assets/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
-<script src="assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
-<script src="assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-<script src="assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
-<script src="assets/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
-<script src="assets/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
-<script src="assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+<script src="{{URL::asset('assets/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js')}}" type="text/javascript"></script>
+<script src="{{URL::asset('assets/global/plugins/bootstrap/js/bootstrap.min.js')}}" type="text/javascript"></script>
+<script src="{{URL::asset('assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js')}}" type="text/javascript"></script>
+<script src="{{URL::asset('assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js')}}" type="text/javascript"></script>
+<script src="{{URL::asset('assets/global/plugins/jquery.blockui.min.js')}}" type="text/javascript"></script>
+<script src="{{URL::asset('assets/global/plugins/jquery.cokie.min.js')}}" type="text/javascript"></script>
+<script src="{{URL::asset('assets/global/plugins/uniform/jquery.uniform.min.js')}}" type="text/javascript"></script>
+<script src="{{URL::asset('assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js')}}" type="text/javascript"></script>
 <!-- END CORE PLUGINS -->
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script src="{{URL::asset('assets/global/scripts/metronic.js')}}" type="text/javascript"></script>
+<script src="{{URL::asset('assets/admin/layout/scripts/layout.js')}}" type="text/javascript"></script>
+<script src="{{URL::asset('assets/admin/layout/scripts/quick-sidebar.js')}}" type="text/javascript"></script>
+<script src="{{URL::asset('assets/admin/layout/scripts/demo.js')}}" type="text/javascript"></script>
+<!-- END PAGE LEVEL SCRIPTS -->
 <!-- BEGIN PAGE LEVEL PLUGINS -->
 <script src="assets/global/plugins/jqvmap/jqvmap/jquery.vmap.js" type="text/javascript"></script>
 <script src="assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.russia.js" type="text/javascript"></script>
@@ -2953,36 +2892,21 @@
 <script src="assets/admin/pages/scripts/tasks.js" type="text/javascript"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
-    jQuery(document).ready(function() {
-        Metronic.init(); // init metronic core componets
-        Layout.init(); // init layout
-        QuickSidebar.init(); // init quick sidebar
-        Demo.init(); // init demo features 
-        Index.init();
-        Index.initDashboardDaterange();
-        Index.initJQVMAP(); // init index page's custom scripts
-        Index.initCalendar(); // init index page's custom scripts
-        Index.initCharts(); // init index page's custom scripts
-        Index.initChat();
-        Index.initMiniCharts();
-        Index.initIntro();
-        Tasks.initDashboardWidget();
-    });
+jQuery(document).ready(function() {
+    Metronic.init(); // init metronic core componets
+    Layout.init(); // init layout
+    QuickSidebar.init(); // init quick sidebar
+    Demo.init(); // init demo features 
+    Index.init();
+    Index.initDashboardDaterange();
+    Index.initJQVMAP(); // init index page's custom scripts
+    Index.initCalendar(); // init index page's custom scripts
+    Index.initCharts(); // init index page's custom scripts
+    Index.initChat();
+    Index.initMiniCharts();
+    Index.initIntro();
+    Tasks.initDashboardWidget();
+});
 </script>
 <!-- END JAVASCRIPTS -->
-<script>
-    (function(i, s, o, g, r, a, m) {
-        i['GoogleAnalyticsObject'] = r;
-        i[r] = i[r] || function() {
-            (i[r].q = i[r].q || []).push(arguments)
-        }, i[r].l = 1 * new Date();
-        a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0];
-        a.async = 1;
-        a.src = g;
-        m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-    ga('create', 'UA-37564768-1', 'keenthemes.com');
-    ga('send', 'pageview');
-</script>
 @stop
