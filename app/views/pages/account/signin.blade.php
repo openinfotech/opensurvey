@@ -68,7 +68,7 @@
                 <div class="alert alert-danger">
                     <button class="close" data-close="alert"></button>
                     <ul>
-                        <p>{{ Session::get('global')}}</p>
+                        <li><span>{{ Session::get('global')}}</span></li>
                     </ul>
                 </div>
                 @endif

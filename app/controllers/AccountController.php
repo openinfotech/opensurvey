@@ -161,6 +161,7 @@ class AccountController extends BaseController {
     }
 
     public function getResetPassword($code) {
+
         $user = User::where('Code', '=', $code);
         if ($user->count()) {
             $user = $user->first();
@@ -175,52 +176,29 @@ class AccountController extends BaseController {
 
     public function postResetPassword() {
         $validator = Validator::make(Input::all(), array(
-                    'password' => 'required|min:6',
+                    'Password' => 'required|min:6',
+                    'Password_again' => 'required|same:Password',
                         )
         );
-
         if ($validator->fails()) {
-            return Redirect:: route('reset-password', $code)
+            return Redirect:: route('reset-password', Input::get('Code'))
                             ->withErrors($validator)
                             ->withInput();
         } else {
 
-//            $user = User::where('Email_Id', '=', Input::get('Email_Id'));
-//            if ($user->count()) {
-//                $user = $user->first();
-//                $code = str_random(60);
-//                $user->Code = $code;
-//                if ($user->save()) {
-//                    Mail::send('emails.auth.activate', array('link' => URL::route('reset-password', $code), 'Name' => Input::get('First_Name') . ' ' . Input::get('Last_Name')), function($message) use ($user) {
-//                        $message->to($user->Email_Id, $user->Username)->subject('Activate Open Survet Account');
-//                    });
-//                    return Redirect:: route('account-sign-in')
-//                                    ->with('global', 'Check your email for reset password !');
-//                }
-//            }
-            return Redirect::route('account-forgot-password')->with('global', 'We could not find your email !');
-//            //activation code
-//            if ($user) {
-//
-//                Mail::send('emails.auth.activate', array('link' => URL::route('account-activate', $code), 'Name' => Input::get('First_Name') . ' ' . Input::get('Last_Name')), function($message) use ($user) {
-//                    $message->to($user->Email_Id, $user->Username)->subject('Activate Open Survet Account');
-//                });
-//                return Redirect:: route('account-forgot-password')
-//                                ->with('global', 'Your account has been created ! We have sent you email !');
-//            }
+            $user = User::where('Uid', '=', Input::get('Version_Id'))->where('Code', '=', Input::get('Code'));
+            if ($user->count()) {
+                $user = $user->first();
+                $user->Code = '';
+                $user->password = Hash::make(Input::get('Password'));
+                if ($user->save()) {
+                    return Redirect:: route('account-sign-in')
+                                    ->with('global', 'Password is Chaged Please Login !');
+                }
+            }
+            return Redirect:: route('account-sign-in')
+                            ->with('global', 'Password is not changed please , try again for process !');
         }
-//        return Redirect:: route('account-forgot-password')
-//                        ->with('global', 'Your can`t create account');
-//        $user = User::where('Code', '=', $code);
-//        if ($user->count()) {
-//            $user = $user->first();
-//            return View::make('pages.account.resetpassword')
-//                            ->with('Uid', $user->Uid)->with('Code', $code);
-////            return Redirect:: route('account-sign-in')
-////                            ->with('global', 'Your account has been created ! We have sent you email !');
-//        }
-//        return Redirect::route('account-sign-in')
-//                        ->with('global', 'We could not activate accaount');
     }
 
 }

@@ -1,3 +1,0 @@
-opensurvey
-
-Objective of  Open Survey is very simple  " Publish Anywhere and Embed Everywhere !".  This object we will achieve using making simple and easy Graphical User Interface (GUI) for creating and maintaining survey system. All of this any person could afford and make his survey better and accurate for getting results or applying any scheme in less cost. But this can be done in within Only 3 Minute and it could use both offline as well as offline for better user experience and covering more area that internet can't reach. Interactive results are one of the most important factor of Open Survey
