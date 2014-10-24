@@ -30,6 +30,16 @@ Route::group(array('before' => 'auth'), function() {
     /**
      * Sign Out(get)
      */
+    Route::get('/survey/create', array(
+        'as' => 'survey-create',
+        'uses' => 'SurveyController@getCreateSurvey'
+    ));
+
+
+
+    /**
+     * Sign Out(get)
+     */
     Route::get('/account/sign-out', array(
         'as' => 'account-sign-out',
         'uses' => 'AccountController@getSignOut'

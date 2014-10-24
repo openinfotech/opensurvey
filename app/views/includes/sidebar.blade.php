@@ -13,19 +13,19 @@
             </li>
             <li>
                 <a href="javascript:;" >
-                    <i class="icon-basket"></i>
+                    <i class="fa fa-copy"></i>
                     <span class="title">Survey</span>
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a href="ecommerce_index.html">
-                            <i class="icon-home"></i>
+                        <a href="{{URL::route('survey-create')}}">
+                            <i class="fa fa-plus"></i>
                             Create Survey</a>
                     </li>
                     <li>
-                        <a href="ecommerce_orders.html">
-                            <i class="icon-basket"></i>
+                        <a href="{{URL::route('show-survey')}}">
+                            <i class="fa fa-list"></i>
                             View Survey</a>
                     </li>
                 </ul>
