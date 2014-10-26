@@ -4,7 +4,7 @@
     <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
     <div class="page-sidebar navbar-collapse collapse">
         <!-- BEGIN SIDEBAR MENU -->
-        <ul class="page-sidebar-menu" data-auto-scroll="true" data-slide-speed="200" style="margin-top:25px;">
+        <ul class="page-sidebar-menu page-sidebar-menu-closed" data-auto-scroll="true" data-slide-speed="200" style="margin-top:25px;">
             <li class="start">
                 <a href="{{URL::route('home')}}">
                     <i class="icon-home"></i>

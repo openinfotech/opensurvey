@@ -19,7 +19,8 @@ var FormValidation = function() {
                 Title: {
                     minlength: 2,
                     required: true
-                }, Description: {
+                },
+                Description: {
                     minlength: 2,
                     required: true
                 },
@@ -56,11 +57,73 @@ var FormValidation = function() {
                 icon.removeClass("fa-warning").addClass("fa-check");
             },
             submitHandler: function(form) {
+
+
+//                $.post(
+//                        'http://localhost/opensurvey/public/survey/create',
+//                        form.serialize(),
+//                        function(data) {
+//                            //do something with data/response returned by server
+//                            console.log(data);
+//                        },
+//                        'json'
+//                        );
+
+
+
                 success2.show();
                 error2.hide();
             }
         });
+        form2.submit(function(event) {
 
+            $.ajax({
+                type: "POST",
+                url: form2.attr('action'),
+                data: form2.serialize(),
+                cache: false,
+                success: function(Data) {
+                    if (Data.success == '1')
+                    {
+                        window.location = Data.Redirect_URL;
+//                        var icon = $('input').parent('.input-icon').children('i');
+//                        $('input').closest('.form-group').removeClass('has-error').addClass('has-success'); // set success class to the control group
+//                        icon.removeClass("fa-warning").addClass("fa-check");
+//
+//                        var icon = $('textarea').parent('.input-icon').children('i');
+//                        $('textarea').closest('.form-group').removeClass('has-error').addClass('has-success'); // set success class to the control group
+//                        icon.removeClass("fa-warning").addClass("fa-check");
+//
+//                        success2.find('p').show();
+//                        error2.hide();
+                    } else {
+                        if (Data.Title != '')
+                        {
+                            var icon = $('#Title').parent('.input-icon').children('i');
+                            icon.removeClass('fa-check').addClass("fa-warning");
+                            icon.attr("data-original-title", Data.Title).tooltip({'container': 'body'});
+                            $('#Title').closest('.form-group').removeClass("has-success").addClass('has-error'); // set error class to the control group   
+
+                            success2.hide();
+                            error2.show();
+                        }
+                        if (Data.Description != '')
+                        {
+                            var icon = $('#Description').parent('.input-icon').children('i');
+                            icon.removeClass('fa-check').addClass("fa-warning");
+                            icon.attr("data-original-title", Data.Title).tooltip({'container': 'body'});
+                            $('#Description').closest('.form-group').removeClass("has-success").addClass('has-error'); // set error class to the control group   
+
+                            success2.hide();
+                            error2.show();
+                        }
+                    }
+                    console.log(Data);
+                }
+            });
+            event.preventDefault();
+            return false;
+        });
 
     }
 

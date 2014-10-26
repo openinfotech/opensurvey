@@ -18,9 +18,24 @@
  */
 Route::group(array('before' => 'auth'), function() {
 
+    /**
+     * Show Survey Admin (get)
+     */
+    Route::get('/survey/admin/{Survey_Id}', array(
+        'as' => 'survey-admin',
+        'uses' => 'SurveyController@getAdminPage'
+    ));
 
     /**
-     * Sign Out(get)
+     * Show Survey(get)
+     */
+    Route::get('/survey/dashboard/{Survey_Id}', array(
+        'as' => 'survey-dashboard',
+        'uses' => 'SurveyController@getSurvey'
+    ));
+
+    /**
+     * Show Survey(get)
      */
     Route::get('/survey', array(
         'as' => 'show-survey',
@@ -28,14 +43,28 @@ Route::group(array('before' => 'auth'), function() {
     ));
 
     /**
-     * Sign Out(get)
+     * Create Survey(get)
      */
     Route::get('/survey/create', array(
         'as' => 'survey-create',
         'uses' => 'SurveyController@getCreateSurvey'
     ));
 
+    /**
+     * Create Survey (POST)
+     */
+    Route::post('/survey/create', array(
+        'as' => 'survey-create-post',
+        'uses' => 'SurveyController@postCreateSurvey'
+    ));
 
+    /**
+     * Sign In Account (POST)
+     */
+    Route::post('/account/sign-in', array(
+        'as' => 'account-sing-in-post',
+        'uses' => 'AccountController@postSignIn'
+    ));
 
     /**
      * Sign Out(get)

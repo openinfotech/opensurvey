@@ -24,20 +24,20 @@
                     <div class="portlet box blue">
                         <div class="portlet-title">
                             <div class="caption">
-                                <i class="fa fa-gift"></i>Validation Using Icons
+                                <i class="fa fa-gift"></i>Survey Form
                             </div>
                         </div>
                         <div class="portlet-body form">
                             <!-- BEGIN FORM-->
-                            <form action="#" id="create_survey" class="form-horizontal">
+                            <form  action="{{URL::route('survey-create-post')}}" id="create_survey" method="post" class="form-horizontal">
                                 <div class="form-body">
                                     <div class="alert alert-danger display-hide">
                                         <button class="close" data-close="alert"></button>
-                                        You have some form errors. Please check below.
+                                        <p>You have some form errors. Please check below.</p>
                                     </div>
                                     <div class="alert alert-success display-hide">
                                         <button class="close" data-close="alert"></button>
-                                        Your form validation is successful!
+                                        <p>Your form validation is successful.</p>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label col-md-3">Title <span class="required">
@@ -46,7 +46,7 @@
                                         <div class="col-md-4">
                                             <div class="input-icon right">
                                                 <i class="fa"></i>
-                                                <input type="text" class="form-control" name="Title"/>
+                                                <input type="text" class="form-control" id="Title" name="Title"/>
                                             </div>
                                         </div>
                                     </div>
@@ -57,7 +57,7 @@
                                         <div class="col-md-4">
                                             <div class="input-icon right">
                                                 <i class="fa"></i>
-                                                <textarea type="text" class="form-control" name="Description"></textarea>
+                                                <textarea type="text" class="form-control" id="Description" name="Description"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -101,6 +101,8 @@
                                         </div>
                                     </div>
                                 </div>
+                                {{Form::token()}}
+
                                 <div class="form-actions">
                                     <div class="row">
                                         <div class="col-md-offset-3 col-md-9">

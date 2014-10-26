@@ -4,6 +4,10 @@
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <meta content="" name="description"/>
 <meta content="" name="author"/>
+<!-- BEGIN PACE PLUGIN FILES -->
+<script src="{{URL::asset('assets/global/plugins/pace/pace.min.js')}}" type="text/javascript"></script>
+{{ HTML::style('assets/global/plugins/pace/themes/pace-theme-minimal.css') }}
+
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
 
 
