@@ -4,12 +4,12 @@
     <div class="page-header-inner">
         <!-- BEGIN LOGO -->
         <div class="page-logo">
-            <a href="index.html">
+            <a href="{{URL::route('home')}}">
                 <img src="{{URL::asset('assets/admin/layout/img/logo.png')}}" alt="logo" class="logo-default"/>
             </a>
-            <!--            <div class="menu-toggler sidebar-toggler">
-                             DOC: Remove the above "hide" to enable the sidebar toggler button on header 
-                        </div>-->
+            <div class="menu-toggler sidebar-toggler">
+                <!--DOC: Remove the above "hide" to enable the sidebar toggler button on header--> 
+            </div>
         </div>
         <!-- END LOGO -->
         <!-- BEGIN HORIZANTAL MENU -->
@@ -28,8 +28,8 @@
                         Administrator
                     </a>
                 </li>
-                <li class="mega-menu-dropdown mega-menu-full">
-                    <a data-toggle="dropdown" href="javascript:;" class="dropdown-toggle">
+                <li class="mega-menu-dropdown">
+                    <a  href="{{URL::route('survey-build',$Survey_Id)}}" class="dropdown-toggle">
                         Build
                     </a>
                 </li>

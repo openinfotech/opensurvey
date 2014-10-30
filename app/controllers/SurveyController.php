@@ -80,4 +80,9 @@ class SurveyController extends BaseController {
                         ->with('Survey_Id', $Survey_Id);
     }
 
+    public function getSurveyBuild($Survey_Id) {
+        return View::make('pages.survey.build')
+                        ->with('Survey_Id', $Survey_Id);
+    }
+
 }

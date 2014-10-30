@@ -19,6 +19,14 @@
 Route::group(array('before' => 'auth'), function() {
 
     /**
+     * Show Survey Build (get)
+     */
+    Route::get('/survey/build/{Survey_Id}', array(
+        'as' => 'survey-build',
+        'uses' => 'SurveyController@getSurveyBuild'
+    ));
+
+    /**
      * Show Survey Admin (get)
      */
     Route::get('/survey/admin/{Survey_Id}', array(
